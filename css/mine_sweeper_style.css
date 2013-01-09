@@ -1,3 +1,4 @@
+/*the style of the container of the mines*/
 .minefield{
 	border-style: solid;
 	border-width: 2px;
@@ -7,6 +8,7 @@
 	margin: 0 auto;
 }
 
+/*the main style of the mines*/
 .mina{
 	width: 40px;
 	height: 30px;
@@ -25,19 +27,21 @@
 	padding-top: 10px;
 }
 
+/*the style of the mine when it's activated and it doesn't got a bomb*/
 .activa{
 	background-color: #FFF;
-	box-shadow: inset 1px 1px 15px #7a7a7a;/*#c1c1c1*/
+	box-shadow: inset 1px 1px 15px #7a7a7a;
 	border-color: #4f4f4f;
 	border-right-color:#787878;
 	border-bottom-color:#787878; 
 }
 
-
+/*the style of the mine when it's activated and it got a bomb*/
 .explota{
 	background-color: #F00;
 }
 
+/*the type of the font in the numbers*/
 .tipo{
 	font-family: Helvetica, Arial, sans-serif;
 	font-weight:bolder;
@@ -45,6 +49,7 @@
 	text-align: center;
 }
 
+/*the color of the font in each case: cmina5 means that the mine touches 5 mines with bomb*/
 .cmina1{ color:#00F; }
 .cmina2{ color:#008000; }
 .cmina3{ color:#F00; }
