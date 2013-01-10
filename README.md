@@ -10,7 +10,7 @@ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 
 - To create a new mineSweeper game you only have to generate a new instance from the library with two parameters, the first one is a literal object which has a grid property with a number of rows and columns (grid:[rows,columns]) and an other property number of mines('minas' in spanish).
 
-- Next you should launch the creaJuego() method with an optional parameter, this one is the id of the tag where you wish to put the game, notice that if you don't give this argument, the game will be append at the body tag.
+- Next you should launch creaJuego() method with an optional parameter, this one is the id of the tag where you wish to put the game, notice that if you don't give this argument, the game will be append at the body tag.
 
 - To give a style to your games, I created the library with a css that you can modify changing the propertys of the clases.
 

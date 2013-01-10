@@ -18,14 +18,16 @@ var mineSweeper=(
 							{x:1,y:0},
 							{x:1,y:1},
 							{x:0,y:1},
-							{x:-1,y:1}];
+							{x:-1,y:1}];// the positions around the selected mine
 
-		var mineSize=40+4; //change it in CSS too
-		var idsSelected=new Array();
-		var numMinas;
-		var reaccion=new Array();
-		var reacting=false;
-
+		var mineSize=40+4; //the size of the mines it must be changed in the CSS too
+		var idsSelected=new Array();// the ids of the mines that are select to have a bomb
+		var numMinas;// total numer of mines
+		var reaccion=new Array();// an array to keep the near mines with 0 bombs arround, and create a chain reaction
+		var reacting=false;// boolean to forbid an other interaction while the script is processing a chain reaction
+		
+		// campoMinas is an object that has a grid property to have references on each mine ordered by their position x,y
+		// and a dom property to create a div tag which keep the mines in the DOM
 		var campoMinas={
 			dom:document.createElement("div"),
 			grid:new Array()
