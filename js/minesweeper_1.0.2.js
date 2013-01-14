@@ -5,8 +5,23 @@ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 A Javascript Library to create mineSweeper Games fully css customizable
 http://www.dimo.cat
 Dimo Visual Creatives S.C.P.
-@DaniValldosera
+@DaniValldo
 */
+
+//fixing some native methods for old versions of IE
+
+if(!Array.prototype.lastIndexOf){
+
+	Array.prototype.lastIndexOf=function(_eletofind){
+		for(var i=0; i<this.length; i++){
+			if(this[i]==_eletofind){
+				return i;
+			};
+		};
+		return -1;
+	};
+
+};
 
 var mineSweeper=(
 	function(settings){
@@ -25,6 +40,7 @@ var mineSweeper=(
 		var numMinas;// total numer of mines
 		var reaccion=new Array();// an array to keep the near mines with 0 bombs arround, and create a chain reaction
 		var reacting=false;// boolean to forbid an other interaction while the script is processing a chain reaction
+		var elementToPut;
 		
 		// campoMinas is an object that has a grid property to have references on each mine ordered by their position x,y
 		// and a dom property to create a div tag which keep the mines in the DOM
@@ -54,10 +70,12 @@ var mineSweeper=(
 				settings.minas=1;
 			}
 
+			elementToPut=_elemToPut;
+
 			campoMinas.dom.className="minefield";
 			campoMinas.dom.style.width=(settings.grid[0]*mineSize)+"px";
 			campoMinas.dom.style.height=(settings.grid[1]*mineSize)+"px";
-			_elemToPut.appendChild(campoMinas.dom);
+			elementToPut.appendChild(campoMinas.dom);
 
 			assignaBombas();
 
@@ -153,6 +171,20 @@ var mineSweeper=(
 			return _bombasCerca;
 		};
 
+		var animateLightBg=function(){
+			var _lbg=document.getElementById("ms_lightboxbg");
+			var _lb=document.getElementById("ms_lightbox");
+			_lbg.className="active fade-in";
+			_lb.className="active fade-in2 tipo";
+		};
+
+		var outanimateLightBg=function(){
+			var _lbg=document.getElementById("ms_lightboxbg");
+			var _lb=document.getElementById("ms_lightbox");
+			_lbg.className="";
+			_lb.className="";
+		};
+
 		var reactCadena = function(_mina){
 
 			var _limiteX=settings.grid[0]-1;
@@ -197,21 +229,9 @@ var mineSweeper=(
 			};
 		};
 
-		var mina=function(){
+		var _onClick=function(u){
 
-			this.id;
-			this.bomba=false;
-			this.posicion={x:0,y:0};
-			this.dom;
-			this.activa=false;
-			this.bombasCerca=0;
-
-			var u=this;
-
-			this.dom=document.createElement("div");
-			this.dom.className="mina";
-			this.dom.addEventListener("click",function(){
-				if((!reacting)&&(!u.activa)){
+			if((!reacting)&&(!u.activa)){
 				reacting=true;
 				if(!u.bomba){
 					if(u.bombasCerca>0){
@@ -228,19 +248,63 @@ var mineSweeper=(
 					}
 
 				}else{
-					alert("HAS TOCADO UNA BOMBA PERDISTE!");
+					//alert("HAS TOCADO UNA BOMBA PERDISTE!");
 					//u.dom.style.backgroundColor="#F00";
+					animateLightBg();
 					u.dom.className="explota mina";
 					reacting=false;
 				};
 
 				};
+		};
+
+		var reset=function(_settings){
+			if(_settings==undefined){
+				_settings={ grid:[10,5], minas:7 };
+			};
+
+		idsSelected=new Array();
+		numMinas=0;
+		reaccion=new Array();
+		reacting=false;
+		elementToPut.removeChild(campoMinas.dom);
+		campoMinas={
+			dom:document.createElement("div"),
+			grid:new Array()
+		};
+		outanimateLightBg();
+		creaJuego(elementToPut.id);
+
+		};
+
+		var mina=function(){
+
+			this.id;
+			this.bomba=false;
+			this.posicion={x:0,y:0};
+			this.dom;
+			this.activa=false;
+			this.bombasCerca=0;
+
+			var u=this;
+
+			this.dom=document.createElement("div");
+			this.dom.className="mina";
+			if(this.dom.addEventListener){
+			this.dom.addEventListener("click",function(){
+				_onClick(u);
 			},false);
+		}else if(this.dom.attachEvent){
+			this.dom.attachEvent("onclick",function(){
+				_onClick(u);
+			});
+		};
 
 		};// Classe Mina
 	
 	return{
-		creaJuego:creaJuego
+		creaJuego:creaJuego,
+		reset:reset
 	};
 	
 	}//constructor

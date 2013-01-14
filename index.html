@@ -1,6 +1,7 @@
 <!doctype html>
 <html>
 	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<link rel="stylesheet" href="css/mine_sweeper_style.css">
 		<link rel="stylesheet" href="css/stylepage.css">
 		<script type="text/javascript" src="js/minesweeper_1.0.2.js"></script>
@@ -8,7 +9,10 @@
 	</head>
 	<body onload="startGame()">
 		<div id="playground"></div>
+		
 	</body>
+	<div id="ms_lightbox">¡HAS PERDIDO! <br> <a href="#" id="reiniciar" onclick="restart()" class="boton">volver a jugar</a> </div>
+		<div id="ms_lightboxbg"></div>
 </html>
 <script type="text/javascript">
 var game;
@@ -17,12 +21,19 @@ function startGame(){
 	//create an instance and configure it with a literal object:
 	//which has a grid with a number of rows and columns (grid:[rows,columns]) and a number of mines('minas' in spanish)
 	game=new mineSweeper({
-		grid:[10,4],
-		minas:5
+		grid:[10,5],
+		minas:7
 	});
 	//launch creaJuego (means createGame) method and give it the id of the element where you want to place the game.
 	// notice that if you don't give it a parameter, it will append the game in the body tag.
 	game.creaJuego('playground');
+
 }
+
+function restart(){
+
+	game.reset();
+
+};
 
 </script>

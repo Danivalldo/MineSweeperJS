@@ -4,7 +4,7 @@ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 A Javascript Library to create mineSweeper Games fully css customizable (another more :D)
 http://www.dimo.cat
 Dimo Visual Creatives S.C.P.
-@DaniValldosera
+@DaniValldo
 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
