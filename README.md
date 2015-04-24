@@ -22,4 +22,4 @@ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 
 This is only an exercise i made for myself in a first instance, without any intention of create something usefully in a real project, but i would to share it. I know i'm not the first one who has created this kind of library, but as i said, it's only a practice for myself.
 
-and sorry for my english.... :D
+
